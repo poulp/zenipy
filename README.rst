@@ -34,7 +34,7 @@ Simple dialog :
 
 .. code-block:: python
 
-    from pythonzenity import *
+    from pythonzenity import Calendar
     result = Calendar(title="Awesome Calendar",text_info="Your birthday ?")
     print result
 
