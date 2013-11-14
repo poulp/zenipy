@@ -1,0 +1,10 @@
+.gitignore
+.git/
+
+*.pyc
+*~
+*.swp
+*.old
+*.back
+
+docs/build/*

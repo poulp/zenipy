@@ -1,0 +1,43 @@
+#TODO
+
+Widget
+======
+ - Error : OK
+ - Warning : OK
+ - Question : OK
+ - Info : OK
+ - Entry : OK
+ - Password : OK
+ - List : -
+ - File Selection : OK
+    - multiple : OK
+    - directory : OK
+    - save : OK
+    - confirm overwrite : OK
+    - filename : OK
+ - Calendar : OK
+    - day : OK
+    - month : OK
+    - year : -
+    - date format : -
+ - Progress : -
+ - Scale : OK
+    - value : OK
+    - min : OK
+    - max : OK
+    - step : OK
+    - draw value : OK
+ - Color Selection : Ok
+    - color : -
+    - show palette : OK
+ - Text Info : -
+
+General Options
+===============
+ - title : OK
+ - icon : -
+ - width : OK
+ - height : OK
+ - timeout : OK
+ - ok-label : -
+ - cancel-label : -
