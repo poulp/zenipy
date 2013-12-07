@@ -23,7 +23,7 @@ Or clone the repo :
 
 .. code-block:: bash
 
-    $ hg clone http://bitbucket.org/poulp/python-zenity
+    $ git clone http://github.org/poulp/python-zenity.git
     $ cd python-zenity/
     $ python setup.py install
 
