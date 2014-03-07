@@ -41,6 +41,7 @@ class Base(object):
 
     def run(self):
         rep = self.dialog.run()
+        self.dialog.destroy()
         return rep
 
     def destroy(self):
