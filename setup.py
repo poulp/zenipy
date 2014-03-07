@@ -4,7 +4,7 @@ setup(
     name='python-zenity',
     version='0.1',
     description='Simple dialog with Python and Gtk',
-    url='http://bitbucket.org/poulp/python-zenity',
+    url='http://github.com/poulp/python-zenity',
     author='poulp',
     author_email='mathieu.nerv@gmail.com',
     license='BSD',
