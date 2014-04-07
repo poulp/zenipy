@@ -2,6 +2,7 @@
 # -*- coding:utf-8 -*-
 
 import pygtk
+pygtk.require('2.0')
 import gtk
 import gobject
 
@@ -11,7 +12,6 @@ import gobject
 ####################################
 DEFAULT_WIDTH = 330
 DEFAULT_HEIGHT = 120
-
 
 ####################################
 # WIDGETS
@@ -41,7 +41,7 @@ class Base(object):
 
     def run(self):
         rep = self.dialog.run()
-        self.dialog.destroy()
+        self.dialog.hide()
         return rep
 
     def destroy(self):
@@ -115,7 +115,6 @@ class PZEntry(Base):
 
         self.dialog.add_buttons(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL, gtk.STOCK_OK, gtk.RESPONSE_OK)
         self.dialog.set_default(self.dialog.get_widget_for_response(gtk.RESPONSE_OK))
-
 
 class PZEntryMessage(PZEntry):
     def __init__(self, *args, **kwargs):

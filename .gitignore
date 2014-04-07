@@ -7,4 +7,5 @@
 *.old
 *.back
 
+python_zenity.egg-info/*
 docs/build/*
