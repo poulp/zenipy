@@ -39,6 +39,9 @@ class Base(object):
         if self.timeout:
             source_id = gobject.timeout_add(self.timeout, self.destroy)
 
+        if self.title:
+            self.dialog.set_title(self.title)
+
     def run(self):
         rep = self.dialog.run()
         self.dialog.hide()
