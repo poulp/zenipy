@@ -39,7 +39,6 @@ class BaseTest(TestCase):
     def test_width(self):
         self.assertEqual(TEST_WIDTH, self._window.dialog.get_size()[0])
 
-    @skip("skipping for now")
     def test_height(self):
         self.assertEqual(TEST_HEIGHT, self._window.dialog.get_size()[1])
 

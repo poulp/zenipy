@@ -130,14 +130,14 @@ class PZEntryMessage(PZEntry):
         if self.title:
             self.dialog.set_title(self.title)
         else:
-            self.dialog.set_title("Ajoutez une nouvelle zone de saisie")
+            self.dialog.set_title("Entry")
 
         # information label
         text_label = gtk.Label()
         if self.text:
             text_label.set_text(self.text)
         else:
-            text_label.set_text("Saisissez un nouveau texte:")
+            text_label.set_text("Text : ")
         text_label.show()
         self.dialog.get_content_area().add(text_label)
 
@@ -169,7 +169,7 @@ class PZEntryPassword(PZEntry):
         if self.text:
             text_label.set_text(self.text)
         else:
-            text_label.set_text("Saisissez votre mot de passe")
+            text_label.set_text("Set your password")
         text_label.show()
         hb_up.add(text_label)
         self.dialog.get_content_area().add(hb_up)
@@ -177,7 +177,7 @@ class PZEntryPassword(PZEntry):
         hb_down = gtk.HBox(spacing=20)
         hb_down.show_all()
 
-        input_label = gtk.Label("Mot de passe : ")
+        input_label = gtk.Label("Password : ")
         input_label.show()
         hb_down.add(input_label)
 
@@ -188,62 +188,62 @@ class PZEntryPassword(PZEntry):
         self.entry_widget.set_visibility(False)
 
 
-class PZList(Base):
-    def __init__(self, columns, text=None, *args, **kwargs):
-        super(PZList, self).__init__(*args, **kwargs)
-
-        self.text = text
-        self.columns = columns
-
-        self.dialog = gtk.Dialog()
-
-        self.init_dialog()
-
-    def init_dialog(self):
-        super(PZList, self).init_dialog()
-
-        if self.title:
-            self.dialog.set_title(self.title)
-        else:
-            self.dialog.set_title("Choisir des objets dans la liste")
-
-        label = gtk.Label()
-        label.show()
-        if self.text:
-            label.set_text(self.text)
-        else:
-            label.set_text("Choisir des objets dans la liste ci-dessous.")
-
-        treestore = gtk.TreeStore()
-        treestore.append(None, ["lol", "lil", "lal"])
-        treestore.append(None, ["lol", "mdr", "pp"])
-
-        cell = gtk.CellRendererText()
-
-        treeview = gtk.TreeView(treestore)
-        treeview.set_border_width(40)
-        treeview.show()
-
-        n = 0
-        for column in self.columns:
-
-            tvcolumn = gtk.TreeViewColumn(column)
-            tvcolumn.set_sort_column_id(0)
-            tvcolumn.pack_start(cell, True)
-            tvcolumn.add_attribute(cell, 'text', n)
-            treeview.append_column(tvcolumn)
-            n += 1
-
-        hb = gtk.HBox()
-        hb.show()
-        frame = gtk.Frame("Choisir des objets dans la liste ci-dessous.")
-        frame.show()
-        frame.add(treeview)
-        hb.pack_start(frame, padding=10)
-        self.dialog.get_content_area().add(hb)
-
-        self.dialog.add_buttons(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL, gtk.STOCK_OK, gtk.RESPONSE_OK,)
-        self.dialog.set_default(self.dialog.get_widget_for_response(gtk.RESPONSE_OK))
+#class PZList(Base):
+#    def __init__(self, columns, text=None, *args, **kwargs):
+#        super(PZList, self).__init__(*args, **kwargs)
+#
+#        self.text = text
+#        self.columns = columns
+#
+#        self.dialog = gtk.Dialog()
+#
+#        self.init_dialog()
+#
+#    def init_dialog(self):
+#        super(PZList, self).init_dialog()
+#
+#        if self.title:
+#            self.dialog.set_title(self.title)
+#        else:
+#            self.dialog.set_title("Choisir des objets dans la liste")
+#
+#        label = gtk.Label()
+#        label.show()
+#        if self.text:
+#            label.set_text(self.text)
+#        else:
+#            label.set_text("Choisir des objets dans la liste ci-dessous.")
+#
+#        treestore = gtk.TreeStore()
+#        treestore.append(None, ["lol", "lil", "lal"])
+#        treestore.append(None, ["lol", "mdr", "pp"])
+#
+#        cell = gtk.CellRendererText()
+#
+#        treeview = gtk.TreeView(treestore)
+#        treeview.set_border_width(40)
+#        treeview.show()
+#
+#        n = 0
+#        for column in self.columns:
+#
+#            tvcolumn = gtk.TreeViewColumn(column)
+#            tvcolumn.set_sort_column_id(0)
+#            tvcolumn.pack_start(cell, True)
+#            tvcolumn.add_attribute(cell, 'text', n)
+#            treeview.append_column(tvcolumn)
+#            n += 1
+#
+#        hb = gtk.HBox()
+#        hb.show()
+#        frame = gtk.Frame("Choisir des objets dans la liste ci-dessous.")
+#        frame.show()
+#        frame.add(treeview)
+#        hb.pack_start(frame, padding=10)
+#        self.dialog.get_content_area().add(hb)
+#
+#        self.dialog.add_buttons(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL, gtk.STOCK_OK, gtk.RESPONSE_OK,)
+#        self.dialog.set_default(self.dialog.get_widget_for_response(gtk.RESPONSE_OK))
 
 
 class PZFileSelection(Base):
@@ -266,7 +266,7 @@ class PZFileSelection(Base):
         if self.title:
             self.dialog.set_title(self.title)
         else:
-            self.dialog.set_title("Selection de fichiers")
+            self.dialog.set_title("File Chooser")
 
         if not self.save and self.multiple:
             self.dialog.set_select_multiple(True)
@@ -438,10 +438,10 @@ def Password(**kwargs):
         return None
 
 
-def List(**kwargs):
-    listp = PZList(**kwargs)
-    answer = listp.run()
-    return answer
+#def List(**kwargs):
+#    listp = PZList(**kwargs)
+#    answer = listp.run()
+#    return answer
 
 
 def FileSelection(**kwargs):
