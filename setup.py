@@ -7,7 +7,7 @@ setup(
     url='http://github.com/poulp/python-zenity',
     author='poulp',
     author_email='mathieu.nerv@gmail.com',
-    license='BSD',
+    license='MIT',
     packages=['pythonzenity'],
     zip_safe=False
 )
