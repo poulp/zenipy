@@ -1,3 +1,6 @@
+.. image:: https://badge.fury.io/py/python-zenity.png
+    :target: http://badge.fury.io/py/python-zenity
+    
 python-zenity
 *************
 
