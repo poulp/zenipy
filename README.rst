@@ -214,7 +214,7 @@ Open a file selection window, return path of files selected.
 +------------------------+---------------------------------------------------+---------+
 | save                   | save mode                                         | boolean |
 +------------------------+---------------------------------------------------+---------+
-| confir_overwrite       | confirm when a file is overwritten              | boolean |
+| confir_overwrite       | confirm when a file is overwritten                | boolean |
 +------------------------+---------------------------------------------------+---------+
 | filename               | placeholder for the filename                      | string  |
 +------------------------+---------------------------------------------------+---------+
