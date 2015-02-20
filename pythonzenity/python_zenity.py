@@ -2,9 +2,9 @@
 # -*- coding:utf-8 -*-
 
 import pygtk
-pygtk.require('2.0')
 import gtk
 import gobject
+pygtk.require('2.0')
 
 
 ####################################
@@ -16,6 +16,8 @@ DEFAULT_HEIGHT = 120
 ####################################
 # WIDGETS
 ####################################
+
+
 class Base(object):
     def __init__(self, title=None, width=None, height=None, timeout=None):
         self.title = title
@@ -25,7 +27,7 @@ class Base(object):
         self.dialog = None
 
     def init_dialog(self):
-        #global config
+        # global config
         self.dialog.set_resizable(True)
 
         # default window size
@@ -37,7 +39,7 @@ class Base(object):
         self.dialog.resize(self.width, self.height)
 
         if self.timeout:
-            source_id = gobject.timeout_add(self.timeout, self.destroy)
+            gobject.timeout_add(self.timeout, self.destroy)
 
         if self.title:
             self.dialog.set_title(self.title)
@@ -63,7 +65,13 @@ class PZSimpleDialog(Base):
         else:
             buttons = gtk.BUTTONS_OK
 
-        self.dialog = gtk.MessageDialog(parent=None, flags=0, type=self.type, buttons=buttons, message_format=None)
+        self.dialog = gtk.MessageDialog(
+            parent=None,
+            flags=0,
+            type=self.type,
+            buttons=buttons,
+            message_format=None
+        )
 
         self.init_dialog()
 
@@ -119,6 +127,7 @@ class PZEntry(Base):
         self.dialog.add_buttons(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL, gtk.STOCK_OK, gtk.RESPONSE_OK)
         self.dialog.set_default(self.dialog.get_widget_for_response(gtk.RESPONSE_OK))
 
+
 class PZEntryMessage(PZEntry):
     def __init__(self, *args, **kwargs):
         super(PZEntryMessage, self).__init__(*args, **kwargs)
@@ -159,7 +168,7 @@ class PZEntryPassword(PZEntry):
         hb_up = gtk.HBox(spacing=20)
         hb_up.show_all()
 
-        #auth icon
+        # auth icon
         icon = gtk.Image()
         icon.set_from_stock(gtk.STOCK_DIALOG_AUTHENTICATION, gtk.ICON_SIZE_DIALOG)
         icon.show()
@@ -184,11 +193,11 @@ class PZEntryPassword(PZEntry):
         hb_down.add(self.entry_widget)
         self.dialog.get_content_area().add(hb_down)
 
-        #pwd property
+        # pwd property
         self.entry_widget.set_visibility(False)
 
 
-#class PZList(Base):
+# class PZList(Base):
 #    def __init__(self, columns, text=None, *args, **kwargs):
 #        super(PZList, self).__init__(*args, **kwargs)
 #
@@ -309,7 +318,7 @@ class PZCalendar(Base):
         hb.show()
 
         if self.text_info:
-            #justify label on the left
+            # justify label on the left
             halign = gtk.Alignment(0, 1, 0, 0)
             halign.show()
 
@@ -363,7 +372,7 @@ class PZScale(Base):
         hb.show()
 
         if self.text_info:
-            #justify label on the left
+            # justify label on the left
             halign = gtk.Alignment(0, 1, 0, 0)
             halign.show()
 
@@ -374,7 +383,7 @@ class PZScale(Base):
             hb.pack_start(halign, padding=10)
             vb.pack_start(hb, padding=10)
 
-        #scale settings
+        # scale settings
         self.scale.show()
         self.scale.set_digits(0)
         vb.add(self.scale)
@@ -438,7 +447,7 @@ def Password(**kwargs):
         return None
 
 
-#def List(**kwargs):
+# def List(**kwargs):
 #    listp = PZList(**kwargs)
 #    answer = listp.run()
 #    return answer
