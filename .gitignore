@@ -10,3 +10,4 @@
 python_zenity.egg-info/*
 docs/build/*
 .idea/*
+dist/
