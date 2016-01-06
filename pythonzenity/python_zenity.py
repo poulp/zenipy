@@ -37,6 +37,7 @@ class Base(object):
             self.height = DEFAULT_HEIGHT
 
         self.dialog.resize(self.width, self.height)
+        self.dialog.set_border_width(5)
 
         if self.timeout:
             gobject.timeout_add(self.timeout, self.destroy)
