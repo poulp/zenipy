@@ -1,6 +1,7 @@
 #! /usr/bin/env python
 # -*- coding:utf-8 -*-
 
+from __future__ import print_function
 import pygtk
 import gtk
 import gobject
@@ -198,62 +199,95 @@ class PZEntryPassword(PZEntry):
         self.entry_widget.set_visibility(False)
 
 
-# class PZList(Base):
-#    def __init__(self, columns, text=None, *args, **kwargs):
-#        super(PZList, self).__init__(*args, **kwargs)
-#
-#        self.text = text
-#        self.columns = columns
-#
-#        self.dialog = gtk.Dialog()
-#
-#        self.init_dialog()
-#
-#    def init_dialog(self):
-#        super(PZList, self).init_dialog()
-#
-#        if self.title:
-#            self.dialog.set_title(self.title)
-#        else:
-#            self.dialog.set_title("Choisir des objets dans la liste")
-#
-#        label = gtk.Label()
-#        label.show()
-#        if self.text:
-#            label.set_text(self.text)
-#        else:
-#            label.set_text("Choisir des objets dans la liste ci-dessous.")
-#
-#        treestore = gtk.TreeStore()
-#        treestore.append(None, ["lol", "lil", "lal"])
-#        treestore.append(None, ["lol", "mdr", "pp"])
-#
-#        cell = gtk.CellRendererText()
-#
-#        treeview = gtk.TreeView(treestore)
-#        treeview.set_border_width(40)
-#        treeview.show()
-#
-#        n = 0
-#        for column in self.columns:
-#
-#            tvcolumn = gtk.TreeViewColumn(column)
-#            tvcolumn.set_sort_column_id(0)
-#            tvcolumn.pack_start(cell, True)
-#            tvcolumn.add_attribute(cell, 'text', n)
-#            treeview.append_column(tvcolumn)
-#            n += 1
-#
-#        hb = gtk.HBox()
-#        hb.show()
-#        frame = gtk.Frame("Choisir des objets dans la liste ci-dessous.")
-#        frame.show()
-#        frame.add(treeview)
-#        hb.pack_start(frame, padding=10)
-#        self.dialog.get_content_area().add(hb)
-#
-#        self.dialog.add_buttons(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL, gtk.STOCK_OK, gtk.RESPONSE_OK,)
-#        self.dialog.set_default(self.dialog.get_widget_for_response(gtk.RESPONSE_OK))
+class PZList(Base):
+    def __init__(self, columns, items, print_columns=0, text=None, *args,
+                 **kwargs):
+        super(PZList, self).__init__(*args, **kwargs)
+
+        self.columns = columns
+        self.colnum = len(columns)
+        self.items = items
+        self.print_columns = print_columns
+        self.text = text
+        self.selection = None
+
+        self.dialog = gtk.Dialog()
+        self.init_dialog()
+
+    def init_dialog(self):
+        super(PZList, self).init_dialog()
+
+        if self.title:
+            self.dialog.set_title(self.title)
+        else:
+            self.dialog.set_title("Choose an item from the list")
+
+        label = gtk.Label()
+        label.show()
+        if self.text:
+            label.set_text(self.text)
+        else:
+            label.set_text("Choose items from the list down below")
+
+        coltypes = [str] * self.colnum
+        store = gtk.ListStore(*coltypes)
+
+        # Zenity's Example is filling the cells row by row
+        # (https://help.gnome.org/users/zenity/stable/list.html.en)
+        # To imitate this we probably need a helper to flatten the items
+        # example: [1,2,3,4,5] -> (1,2,3), (4,5,'')
+        def group(list, size):
+            for i in range(0, len(list), size):
+                group = list[i:i+size]
+                if len(group) == size:
+                    yield(tuple(group))
+                else:
+                    # fill empty indices with empty string
+                    yield(tuple(group + ['']*(size-len(group))))
+
+        for g in group(self.items, self.colnum):
+            store.append(g)
+
+        cell = gtk.CellRendererText()
+        treeview = gtk.TreeView(store)
+        treeview.set_border_width(40)
+        treeview.show()
+        treeview.get_selection().connect("changed", self._on_item_selected)
+
+        for i, column in enumerate(self.columns):
+            tvcolumn = gtk.TreeViewColumn(column)
+            tvcolumn.set_sort_column_id(0)
+            tvcolumn.pack_start(cell, True)
+            tvcolumn.add_attribute(cell, 'text', i)
+            treeview.append_column(tvcolumn)
+
+        hb = gtk.HBox()
+        hb.show()
+        frame = gtk.Frame("Choose items from the list down below")
+        frame.show()
+        frame.add(treeview)
+        hb.pack_start(frame, padding=10)
+        self.dialog.get_content_area().add(hb)
+
+        self.dialog.add_buttons(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL,
+                                gtk.STOCK_OK, gtk.RESPONSE_OK,)
+        self.dialog.set_default(self.dialog.get_widget_for_response(
+            gtk.RESPONSE_OK))
+
+    def _on_item_selected(self, selection):
+        model, treeiter = selection.get_selected()
+        if not treeiter:
+            self.selection = None
+            return
+        if self.print_columns == 'ALL':
+            self.selection = [x for x in model[treeiter]]
+        else:
+            try:
+                self.selection = [model[treeiter][self.print_columns]]
+            except IndexError:
+                print("Error: Column index out of range")
+            except TypeError:
+                print("Error: Column index must be integer")
 
 
 class PZFileSelection(Base):
@@ -448,10 +482,13 @@ def Password(**kwargs):
         return None
 
 
-# def List(**kwargs):
-#    listp = PZList(**kwargs)
-#    answer = listp.run()
-#    return answer
+def List(**kwargs):
+    listp = PZList(**kwargs)
+    l = listp.run()
+    if l == gtk.RESPONSE_OK:
+        return listp.selection
+    else:
+        return None
 
 
 def FileSelection(**kwargs):
