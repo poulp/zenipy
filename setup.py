@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='python-zenity',
-    version='0.1.1',
+    version='0.1.2',
     description='Simple dialog with Python and Gtk',
     url='http://github.com/poulp/python-zenity',
     author='poulp',
