@@ -26,8 +26,8 @@ Or clone the repo :
 
 .. code-block:: bash
 
-    $ git clone http://github.org/poulp/python-zenity.git
-    $ cd python-zenity/
+    $ git clone https://github.com/poulp/python-zenity.git
+    $ cd ./python-zenity
     $ python setup.py install
 
 Example
