@@ -26,8 +26,8 @@ Or clone the repo :
 
 .. code-block:: bash
 
-    $ git clone http://github.org/poulp/python-zenity.git
-    $ cd python-zenity/
+    $ git clone https://github.com/poulp/python-zenity.git
+    $ cd ./python-zenity
     $ python setup.py install
 
 Example
@@ -214,7 +214,7 @@ Open a file selection window, return path of files selected.
 +------------------------+---------------------------------------------------+---------+
 | save                   | save mode                                         | boolean |
 +------------------------+---------------------------------------------------+---------+
-| confir_overwrite       | confirm when a file is overwritten                | boolean |
+| confirm_overwrite      | confirm when a file is overwritten                | boolean |
 +------------------------+---------------------------------------------------+---------+
 | filename               | placeholder for the filename                      | string  |
 +------------------------+---------------------------------------------------+---------+

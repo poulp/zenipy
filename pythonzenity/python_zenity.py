@@ -26,6 +26,7 @@ class Base(object):
         self.height = height
         self.timeout = timeout
         self.dialog = None
+        self.response = None
 
     def init_dialog(self):
         # global config
@@ -41,18 +42,27 @@ class Base(object):
         self.dialog.set_border_width(5)
 
         if self.timeout:
-            gobject.timeout_add(self.timeout, self.destroy)
+            gobject.timeout_add(self.timeout, self._destroy)
 
         if self.title:
             self.dialog.set_title(self.title)
+        self.dialog.connect("destroy", self._destroy)
 
     def run(self):
-        rep = self.dialog.run()
-        self.dialog.hide()
-        return rep
+        self.dialog.show()
+        self.dialog.connect("response", self._response)
+        gtk.main()
 
-    def destroy(self):
+    def _response(self, dialog, response):
+        self.set_response(response)
+        self._destroy(self.dialog)
+
+    def _destroy(self, dialog):
         self.dialog.destroy()
+        gtk.main_quit()
+
+    def set_response(self, response):
+        self.response = response
 
 
 class PZSimpleDialog(Base):
@@ -128,6 +138,10 @@ class PZEntry(Base):
 
         self.dialog.add_buttons(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL, gtk.STOCK_OK, gtk.RESPONSE_OK)
         self.dialog.set_default(self.dialog.get_widget_for_response(gtk.RESPONSE_OK))
+
+    def set_response(self, response):
+        if response == gtk.RESPONSE_OK:
+            self.response = self.entry_widget.get_text()
 
 
 class PZEntryMessage(PZEntry):
@@ -289,6 +303,10 @@ class PZList(Base):
             except TypeError:
                 print("Error: Column index must be integer")
 
+    def set_response(self, response):
+        if response == gtk.RESPONSE_OK:
+            self.response = self.selection
+
 
 class PZFileSelection(Base):
     def __init__(self, multiple=False, directory=False, save=False, confirm_overwrite=False, filename=None, *args, **kwargs):
@@ -300,7 +318,13 @@ class PZFileSelection(Base):
         self.confirm_overwrite = confirm_overwrite
         self.filename = filename
 
-        self.dialog = gtk.FileChooserDialog(buttons=(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL, gtk.STOCK_OK, gtk.RESPONSE_OK))
+        self.dialog = gtk.FileChooserDialog(
+            buttons=(
+                gtk.STOCK_CANCEL,
+                gtk.RESPONSE_CANCEL,
+                gtk.STOCK_OK,
+                gtk.RESPONSE_OK)
+        )
 
         self.init_dialog()
 
@@ -326,6 +350,13 @@ class PZFileSelection(Base):
 
         if self.filename:
             self.dialog.set_filename(self.filename)
+
+    def set_response(self, response):
+        if response == gtk.RESPONSE_OK:
+            if self.multiple:
+                self.response = self.dialog.get_filenames()
+            else:
+                self.response = self.dialog.get_filename()
 
 
 class PZCalendar(Base):
@@ -380,6 +411,10 @@ class PZCalendar(Base):
     def _day_selected(self, calendar, event):
         self.dialog.response(gtk.RESPONSE_OK)
 
+    def set_response(self, response):
+        if response == gtk.RESPONSE_OK:
+            self.response = self.calendar.get_date()
+
 
 class PZScale(Base):
     def __init__(self, text_info=None, value=0, min=0, max=100, step=1, draw_value=True, *args, **kwargs):
@@ -427,6 +462,10 @@ class PZScale(Base):
         self.dialog.add_buttons(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL, gtk.STOCK_OK, gtk.RESPONSE_OK,)
         self.dialog.set_default(self.dialog.get_widget_for_response(gtk.RESPONSE_OK))
 
+    def set_response(self, response):
+        if response == gtk.RESPONSE_OK:
+            self.response = self.scale.get_adjustment().get_value()
+
 
 class PZColorSelection(Base):
     def __init__(self, title="Color Selection", show_palette=False, *args, **kwargs):
@@ -439,92 +478,74 @@ class PZColorSelection(Base):
     def init_dialog(self):
         super(PZColorSelection, self).init_dialog()
 
+    def set_response(self, response):
+        if response == gtk.RESPONSE_OK:
+            self.response = self.dialog.get_color_selection().get_current_color().to_string()
 
 ####################################
 # GENERAL FUNCTION
 ####################################
 def Message(**kwargs):
     message = PZSimpleDialog(type=gtk.MESSAGE_INFO, **kwargs)
-    return message.run()
+    message.run()
+    return message.response
 
 
 def Error(**kwargs):
     error = PZSimpleDialog(type=gtk.MESSAGE_ERROR, **kwargs)
-    return error.run()
+    error.run()
+    return error.response
 
 
 def Warning(**kwargs):
     warning = PZSimpleDialog(type=gtk.MESSAGE_WARNING, **kwargs)
-    return warning.run()
+    warning.run()
+    return warning.response
 
 
 def Question(**kwargs):
     question = PZSimpleDialog(type=gtk.MESSAGE_QUESTION, **kwargs)
-    answer = question.run()
-    return True if answer == gtk.RESPONSE_YES else False
+    question.run()
+    return question.response
 
 
 def Entry(**kwargs):
     entry = PZEntryMessage(**kwargs)
-    response = entry.run()
-    if response == gtk.RESPONSE_OK:
-        return entry.entry_widget.get_text()
-    else:
-        return None
+    entry.run()
+    return entry.response
 
 
 def Password(**kwargs):
     pwd = PZEntryPassword(**kwargs)
-    response = pwd.run()
-    if response == gtk.RESPONSE_OK:
-        return pwd.entry_widget.get_text()
-    else:
-        return None
+    pwd.run()
+    return pwd.response
 
 
 def List(**kwargs):
     listp = PZList(**kwargs)
-    l = listp.run()
-    if l == gtk.RESPONSE_OK:
-        return listp.selection
-    else:
-        return None
+    listp.run()
+    return listp.response
 
 
 def FileSelection(**kwargs):
     file = PZFileSelection(**kwargs)
-    answer = file.run()
-    if answer == gtk.RESPONSE_OK:
-        if file.multiple:
-            return file.dialog.get_filenames()
-        else:
-            return file.dialog.get_filename()
-    else:
-        return None
+    file.run()
+    return file.response
 
 
 def Calendar(**kwargs):
     calendar = PZCalendar(**kwargs)
-    c = calendar.run()
-    if c == gtk.RESPONSE_OK:
-        return calendar.calendar.get_date()
-    else:
-        return None
+    calendar.run()
+    return calendar.response
 
 
 def Scale(**kwargs):
     scale = PZScale(**kwargs)
-    s = scale.run()
-    if s == gtk.RESPONSE_OK:
-        return scale.scale.get_adjustment().get_value()
-    else:
-        return None
+    scale.run()
+    return scale.response
 
 
 def ColorSelection(**kwargs):
     cs = PZColorSelection(**kwargs)
-    color = cs.run()
-    if color == gtk.RESPONSE_OK:
-        return cs.dialog.get_color_selection().get_current_color().to_string()
-    else:
-        return None
+    cs.run()
+    return cs.response
