@@ -48,7 +48,7 @@ This code show a calendar dialog :
 
 And display the result :
 
-.. code-block:: python
+.. code-block:: bash
 
     $ python test.py
     $ (2013, 7, 8)
