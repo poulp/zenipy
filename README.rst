@@ -1,6 +1,10 @@
 .. image:: https://badge.fury.io/py/zenipy.png
     :target: http://badge.fury.io/py/zenipy
-    
+
+.. image:: https://readthedocs.org/projects/zenipy/badge/?version=latest
+    :target: http://zenipy.readthedocs.io/en/latest/?badge=latest
+    :alt: Documentation Status
+
 Zenipy
 ******
 
