@@ -58,4 +58,4 @@ And display the result :
     $ python test.py
     $ (year=2017, month=6, day=4)
 
-There is more dialog, checkout the `documentation http://zenipy.readthedocs.io/en/latest/`_ !
+There is more dialog, checkout the `documentation <http://zenipy.readthedocs.io/en/latest/>`_ !
