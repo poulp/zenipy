@@ -1,14 +1,13 @@
 from setuptools import setup
 
 setup(
-    name='python-zenity',
-    version='0.1.3',
+    name='zenipy',
+    version='0.1.4',
     description='Simple dialog with Python and Gtk',
-    url='http://github.com/poulp/python-zenity',
+    url='http://github.com/poulp/zenipy',
     author='poulp',
-    author_email='mathieu.nerv@gmail.com',
-    license='MIT',
-    packages=['pythonzenity'],
+    author_email='amathieu@protonmail.com',
+    license='WTFPL',
+    packages=['zenipy'],
     zip_safe=False
 )
-
