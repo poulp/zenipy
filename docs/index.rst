@@ -3,14 +3,15 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to Zenipy's documentation!
-**********************************
+Zenipy
+******
 
 Requirements
 ============
 
 * Python 2 or 3
 * GTK+3
+* python3-gi or python-gi (for python2)
 
 Installation
 ============
