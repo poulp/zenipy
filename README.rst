@@ -62,9 +62,10 @@ API
 ===
 
 .. code-block:: python
+
     zenipy.zenipy.message(title='', text='', width=330, height=120, timeout=None)
 
-   Display a simple message
+Display a simple message
 
    Parameters:
       * **text** (*str*) – text inside the window
@@ -80,7 +81,7 @@ API
 .. code-block:: python
     zenipy.zenipy.error(title='', text='', width=330, height=120, timeout=None)
 
-   Display a simple error
+Display a simple error
 
    Parameters:
       * **text** (*str*) – text inside the window
@@ -96,7 +97,7 @@ API
 .. code-block:: python
     zenipy.zenipy.warning(title='', text='', width=330, height=120, timeout=None)
 
-   Display a simple warning
+Display a simple warning
 
    Parameters:
       * **text** (*str*) – text inside the window
@@ -112,7 +113,7 @@ API
 .. code-block:: python
     zenipy.zenipy.question(title='', text='', width=330, height=120, timeout=None)
 
-   Display a question, possible answer are yes/no.
+Display a question, possible answer are yes/no.
 
    Parameters:
       * **text** (*str*) – text inside the window
@@ -134,7 +135,7 @@ API
 .. code-block:: python
     zenipy.zenipy.entry(text='', placeholder='', title='', width=330, height=120, timeout=None)
 
-   Display a text input
+Display a text input
 
    Parameters:
       * **text** (*str*) – text inside the window
@@ -158,7 +159,7 @@ API
 .. code-block:: python
     zenipy.zenipy.password(text='', placeholder='', title='', width=330, height=120, timeout=None)
 
-   Display a text input with hidden characters
+Display a text input with hidden characters
 
    Parameters:
       * **text** (*str*) – text inside the window
@@ -182,7 +183,7 @@ API
 .. code-block:: python
     zenipy.zenipy.zlist(columns, items, print_columns=None, text='', title='', width=330, height=120, timeout=None)
 
-   Display a list of values
+Display a list of values
 
    Parameters:
       * **columns** (*list of strings*) – a list of columns name
@@ -211,7 +212,7 @@ API
 .. code-block:: python
     zenipy.zenipy.file_selection(multiple=False, directory=False, save=False, confirm_overwrite=False, filename=None, title='', width=330, height=120, timeout=None)
 
-   Open a file selection window
+Open a file selection window
 
    Parameters:
       * **multiple** (*bool*) – allow multiple file selection
@@ -244,7 +245,7 @@ API
 .. code-block:: python
     zenipy.zenipy.calendar(text='', day=None, month=None, title='', width=330, height=120, timeout=None)
 
-   Display a calendar
+Display a calendar
 
    Parameters:
       * **text** (*str*) – text inside the window
@@ -272,7 +273,7 @@ API
 .. code-block:: python
     zenipy.zenipy.color_selection(show_palette=False, opacity_control=False, title='', width=330, height=120, timeout=None)
 
-   Display a color selection dialog
+Display a color selection dialog
 
    Parameters:
       * **show_palette** (*bool*) – hide/show the palette with
@@ -297,7 +298,7 @@ API
 .. code-block:: python
     zenipy.zenipy.scale(text='', value=0, min=0, max=100, step=1, draw_value=True, title='', width=330, height=120, timeout=None)
 
-   Select a number with a range widget
+Select a number with a range widget
 
    Parameters:
       * **text** (*str*) – text inside window
