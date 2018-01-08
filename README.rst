@@ -61,7 +61,8 @@ And display the result :
 API
 ===
 
-zenipy.zenipy.message(title='', text='', width=330, height=120, timeout=None)
+.. code-block:: python
+    zenipy.zenipy.message(title='', text='', width=330, height=120, timeout=None)
 
    Display a simple message
 
@@ -76,7 +77,8 @@ zenipy.zenipy.message(title='', text='', width=330, height=120, timeout=None)
 
       * **timeout** (*int*) – close the window after n seconds
 
-zenipy.zenipy.error(title='', text='', width=330, height=120, timeout=None)
+.. code-block:: python
+    zenipy.zenipy.error(title='', text='', width=330, height=120, timeout=None)
 
    Display a simple error
 
@@ -91,7 +93,8 @@ zenipy.zenipy.error(title='', text='', width=330, height=120, timeout=None)
 
       * **timeout** (*int*) – close the window after n seconds
 
-zenipy.zenipy.warning(title='', text='', width=330, height=120, timeout=None)
+.. code-block:: python
+    zenipy.zenipy.warning(title='', text='', width=330, height=120, timeout=None)
 
    Display a simple warning
 
@@ -106,7 +109,8 @@ zenipy.zenipy.warning(title='', text='', width=330, height=120, timeout=None)
 
       * **timeout** (*int*) – close the window after n seconds
 
-zenipy.zenipy.question(title='', text='', width=330, height=120, timeout=None)
+.. code-block:: python
+    zenipy.zenipy.question(title='', text='', width=330, height=120, timeout=None)
 
    Display a question, possible answer are yes/no.
 
@@ -127,7 +131,8 @@ zenipy.zenipy.question(title='', text='', width=330, height=120, timeout=None)
    Return type:
       bool
 
-zenipy.zenipy.entry(text='', placeholder='', title='', width=330, height=120, timeout=None)
+.. code-block:: python
+    zenipy.zenipy.entry(text='', placeholder='', title='', width=330, height=120, timeout=None)
 
    Display a text input
 
@@ -150,7 +155,8 @@ zenipy.zenipy.entry(text='', placeholder='', title='', width=330, height=120, ti
    Return type:
       str
 
-zenipy.zenipy.password(text='', placeholder='', title='', width=330, height=120, timeout=None)
+.. code-block:: python
+    zenipy.zenipy.password(text='', placeholder='', title='', width=330, height=120, timeout=None)
 
    Display a text input with hidden characters
 
@@ -173,7 +179,8 @@ zenipy.zenipy.password(text='', placeholder='', title='', width=330, height=120,
    Return type:
       str
 
-zenipy.zenipy.zlist(columns, items, print_columns=None, text='', title='', width=330, height=120, timeout=None)
+.. code-block:: python
+    zenipy.zenipy.zlist(columns, items, print_columns=None, text='', title='', width=330, height=120, timeout=None)
 
    Display a list of values
 
@@ -201,7 +208,8 @@ zenipy.zenipy.zlist(columns, items, print_columns=None, text='', title='', width
    Return type:
       list
 
-zenipy.zenipy.file_selection(multiple=False, directory=False, save=False, confirm_overwrite=False, filename=None, title='', width=330, height=120, timeout=None)
+.. code-block:: python
+    zenipy.zenipy.file_selection(multiple=False, directory=False, save=False, confirm_overwrite=False, filename=None, title='', width=330, height=120, timeout=None)
 
    Open a file selection window
 
@@ -233,7 +241,8 @@ zenipy.zenipy.file_selection(multiple=False, directory=False, save=False, confir
    Return type:
       string or list if multiple enabled
 
-zenipy.zenipy.calendar(text='', day=None, month=None, title='', width=330, height=120, timeout=None)
+.. code-block:: python
+    zenipy.zenipy.calendar(text='', day=None, month=None, title='', width=330, height=120, timeout=None)
 
    Display a calendar
 
@@ -260,7 +269,8 @@ zenipy.zenipy.calendar(text='', day=None, month=None, title='', width=330, heigh
    Return type:
       tuple
 
-zenipy.zenipy.color_selection(show_palette=False, opacity_control=False, title='', width=330, height=120, timeout=None)
+.. code-block:: python
+    zenipy.zenipy.color_selection(show_palette=False, opacity_control=False, title='', width=330, height=120, timeout=None)
 
    Display a color selection dialog
 
@@ -284,7 +294,8 @@ zenipy.zenipy.color_selection(show_palette=False, opacity_control=False, title='
    Return type:
       str
 
-zenipy.zenipy.scale(text='', value=0, min=0, max=100, step=1, draw_value=True, title='', width=330, height=120, timeout=None)
+.. code-block:: python
+    zenipy.zenipy.scale(text='', value=0, min=0, max=100, step=1, draw_value=True, title='', width=330, height=120, timeout=None)
 
    Select a number with a range widget
 
