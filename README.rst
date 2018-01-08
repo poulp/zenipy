@@ -79,6 +79,7 @@ Display a simple message
       * **timeout** (*int*) – close the window after n seconds
 
 .. code-block:: python
+    
     zenipy.zenipy.error(title='', text='', width=330, height=120, timeout=None)
 
 Display a simple error
@@ -95,6 +96,7 @@ Display a simple error
       * **timeout** (*int*) – close the window after n seconds
 
 .. code-block:: python
+    
     zenipy.zenipy.warning(title='', text='', width=330, height=120, timeout=None)
 
 Display a simple warning
@@ -111,6 +113,7 @@ Display a simple warning
       * **timeout** (*int*) – close the window after n seconds
 
 .. code-block:: python
+    
     zenipy.zenipy.question(title='', text='', width=330, height=120, timeout=None)
 
 Display a question, possible answer are yes/no.
@@ -133,6 +136,7 @@ Display a question, possible answer are yes/no.
       bool
 
 .. code-block:: python
+    
     zenipy.zenipy.entry(text='', placeholder='', title='', width=330, height=120, timeout=None)
 
 Display a text input
@@ -157,6 +161,7 @@ Display a text input
       str
 
 .. code-block:: python
+    
     zenipy.zenipy.password(text='', placeholder='', title='', width=330, height=120, timeout=None)
 
 Display a text input with hidden characters
@@ -181,6 +186,7 @@ Display a text input with hidden characters
       str
 
 .. code-block:: python
+    
     zenipy.zenipy.zlist(columns, items, print_columns=None, text='', title='', width=330, height=120, timeout=None)
 
 Display a list of values
@@ -210,6 +216,7 @@ Display a list of values
       list
 
 .. code-block:: python
+    
     zenipy.zenipy.file_selection(multiple=False, directory=False, save=False, confirm_overwrite=False, filename=None, title='', width=330, height=120, timeout=None)
 
 Open a file selection window
@@ -243,6 +250,7 @@ Open a file selection window
       string or list if multiple enabled
 
 .. code-block:: python
+    
     zenipy.zenipy.calendar(text='', day=None, month=None, title='', width=330, height=120, timeout=None)
 
 Display a calendar
@@ -271,6 +279,7 @@ Display a calendar
       tuple
 
 .. code-block:: python
+    
     zenipy.zenipy.color_selection(show_palette=False, opacity_control=False, title='', width=330, height=120, timeout=None)
 
 Display a color selection dialog
@@ -296,6 +305,7 @@ Display a color selection dialog
       str
 
 .. code-block:: python
+    
     zenipy.zenipy.scale(text='', value=0, min=0, max=100, step=1, draw_value=True, title='', width=330, height=120, timeout=None)
 
 Select a number with a range widget
