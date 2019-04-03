@@ -8,6 +8,7 @@ from gi.repository import Gtk, GLib
 
 DEFAULT_WIDTH = 330
 DEFAULT_HEIGHT = 120
+ZLIST_HEIGHT = 400
 
 
 class Base(object):
@@ -555,7 +556,7 @@ def password(text="", placeholder="", title="",
 
 def zlist(columns, items, print_columns=None,
           text="", title="", width=DEFAULT_WIDTH,
-          height=DEFAULT_HEIGHT, timeout=None):
+          height=ZLIST_HEIGHT, timeout=None):
     """
     Display a list of values
 
