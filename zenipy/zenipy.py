@@ -217,7 +217,7 @@ class ZList(Base):
             label.show()
             frame.set_label(self.text)
         frame.show()
-        scrolledwindow = Gtk.ScrolledWindow(expand = True)
+        scrolledwindow = Gtk.ScrolledWindow(expand=True)
         scrolledwindow.show()
         scrolledwindow.add(treeview)
         frame.add(scrolledwindow)
