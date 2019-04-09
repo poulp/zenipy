@@ -8,6 +8,7 @@ from gi.repository import Gtk, GLib
 
 DEFAULT_WIDTH = 330
 DEFAULT_HEIGHT = 120
+ZLIST_HEIGHT = 400
 
 
 class Base(object):
@@ -216,9 +217,14 @@ class ZList(Base):
             label.show()
             frame.set_label(self.text)
         frame.show()
-        frame.add(treeview)
+        scrolledwindow = Gtk.ScrolledWindow(expand=True)
+        scrolledwindow.show()
+        scrolledwindow.add(treeview)
+        frame.add(scrolledwindow)
         hb.pack_start(frame, True, True, 10)
-        self.dialog.get_content_area().add(hb)
+        vb = self.dialog.get_content_area()
+        vb.set_spacing(10)
+        vb.add(hb)
         self.dialog.add_buttons(Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,
                                 Gtk.STOCK_OK, Gtk.ResponseType.OK)
         self.dialog.set_default(
@@ -550,7 +556,7 @@ def password(text="", placeholder="", title="",
 
 def zlist(columns, items, print_columns=None,
           text="", title="", width=DEFAULT_WIDTH,
-          height=DEFAULT_HEIGHT, timeout=None):
+          height=ZLIST_HEIGHT, timeout=None):
     """
     Display a list of values
 
