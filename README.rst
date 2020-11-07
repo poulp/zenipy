@@ -8,7 +8,7 @@
 Zenipy
 ******
 
-Zenipy is a library for python wich inspired by Zenity. When you write scripts,
+Zenipy is a library for python which was inspired by Zenity. When you write scripts,
 you can use Zenipy to create simple dialogs that interact graphically with the user.
 
 Requirements
